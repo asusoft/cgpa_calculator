@@ -12,8 +12,6 @@ export const COLORS = {
   black: '#000000',
 };
 
-
-
 const appTheme = { COLORS };
 
 export default appTheme;
