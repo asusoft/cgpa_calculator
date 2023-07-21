@@ -1,5 +1,6 @@
 export const COLORS = {
   grey: '#808080',
+  secondary: '#FFFAF0',
   lightGray: '#DDDDDD',
   lightGray2: '#ededed',
   background: '#FFF',
