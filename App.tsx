@@ -1,10 +1,8 @@
 import {
-  StyleSheet,
   useColorScheme,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Loading from './srs/screens/Loading';
 import RootNavigator from './srs/navigation';
 
 function App(): JSX.Element {
@@ -13,7 +11,6 @@ function App(): JSX.Element {
     <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
-
   );
 }
 

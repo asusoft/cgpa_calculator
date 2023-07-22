@@ -1,17 +1,23 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Modal } from 'react-native';
 import Button from '../components/Button';
 import FormInput from '../components/FormInput';
 import { COLORS } from '../assets/constants/theme';
-import { useNavigation } from '@react-navigation/native';
+import Calculate from './Calculate';
+
 // create a component
 const Landing = () => {
-    const navigation = useNavigation()
     const [subjects, setSubjects] = useState("")
+    const [isModalVisible, setIsModalVisible] = useState(false)
 
     const handleNext = () => {
-        navigation.navigate("Calculate", { numberOfSubjects: subjects })
+        setIsModalVisible(true)
+    }
+
+    const closeModal = () => {
+        setSubjects("")
+        setIsModalVisible(false)
     }
     return (
         <View style={styles.container}>
@@ -20,7 +26,7 @@ const Landing = () => {
                 containerStyle={{
                     height: 50,
                     width: '50%',
-                    marginBottom:30
+                    marginBottom: 30
                 }}
                 onChange={value => {
                     setSubjects(value);
@@ -28,7 +34,14 @@ const Landing = () => {
                 textAlign='center'
                 maxLength={2}
             />
-           <Button onPress={() => handleNext()} text='Далее' color={COLORS.green} textColor={COLORS.secondary}/>
+            <Button onPress={() => handleNext()} text='Далее' color={COLORS.green} textColor={COLORS.secondary} />
+            {
+                isModalVisible && (
+                    <View style={styles.modalContainer}>
+                        <Calculate numberOfSubjects={subjects} closeModal={closeModal} />
+                    </View>
+                )
+            }
         </View>
     );
 };
@@ -47,6 +60,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: COLORS.background,
     },
+    modalContainer: {
+        ...StyleSheet.absoluteFillObject,
+    }
 });
 
 //make this component available to the app

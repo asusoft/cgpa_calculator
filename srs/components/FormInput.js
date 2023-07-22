@@ -27,6 +27,7 @@ const FormInput = ({
     value,
     textAlign,
     inputContainerStyle,
+    ref
 }) => {
     return (
         <View style={{ ...containerStyle }}>
@@ -59,6 +60,7 @@ const FormInput = ({
                     value={value}
                     autoCorrect={false}
                     textAlign={textAlign}
+                    ref={ref}
                 />
                 {appendComponent}
             </View>

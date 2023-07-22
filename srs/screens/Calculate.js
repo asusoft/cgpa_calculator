@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FormInput from '../components/FormInput';
 import { getCoefficient, getGrade } from '../context/functions';
 import { COLORS } from '../assets/constants/theme';
+import Button from '../components/Button';
 
 class Calculate extends Component {
     constructor(props) {
@@ -17,11 +18,16 @@ class Calculate extends Component {
         this.setState({ numberOfSubjects: text });
     };
 
+
+    textInputRefs = []
+
     generateRows = () => {
-        const { numberOfSubjects } = this.props.route.params;
+        const { numberOfSubjects } = this.props;
         const rows = [];
 
         for (let i = 0; i < parseInt(numberOfSubjects); i++) {
+          
+
             rows.push(
                 <View key={i} style={{ flexDirection: 'row', width: '100%', marginTop: -5 }}>
                     <View>
@@ -29,6 +35,7 @@ class Calculate extends Component {
                     </View>
                     <View style={{ flex: 1, marginStart: 15, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <FormInput
+                           
                             containerStyle={{
                                 height: 40,
                                 marginBottom: 30,
@@ -51,6 +58,7 @@ class Calculate extends Component {
                             maxLength={3}
                         />
                         <FormInput
+                           
                             containerStyle={{
                                 height: 40,
                                 marginBottom: 30,
@@ -173,67 +181,82 @@ class Calculate extends Component {
         return (this.getTotalGPASum() / this.getTotalWeightSum()).toFixed(2)
     };
 
+    clearData = () => {
+        this.setState({ subjects: [] }, () => {
+            this.clearTextInputValues();
+        })
+    }
+
+    clearTextInputValues = () => {
+        this.textInputRefs.forEach(ref => (ref.current.value = ''))
+    }
+
+    goBack = () => {
+        this.props.closeModal();
+    }
+
     render() {
-        const { numberOfSubjects } = this.props.route.params;
+        const { numberOfSubjects } = this.props;
         return (
             <ScrollView>
-            <View style={styles.container}>
-                <View style={{ margin: 35, flex: 1 }}>
-                    <Text style={{ fontSize: 16, fontWeight: '700' }}>Количество дисциплин: {numberOfSubjects}</Text>
-                    <View style={{ marginStart: 25, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                height: 40,
-                                width: '15%',
-                            }}
-                        >
-                            <Text style={{ fontSize: 14, fontWeight: '700' }}>БАЛЛ</Text>
+                <View style={styles.container}>
+                    <View style={{ margin: 35, flex: 1 }}>
+                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Количество дисциплин: {numberOfSubjects}</Text>
+                        <View style={{ marginStart: 25, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    height: 40,
+                                    width: '15%',
+                                }}
+                            >
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>БАЛЛ</Text>
+                            </View>
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    height: 40,
+                                    width: '15%',
+                                }}
+                            >
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>ЗЕТ</Text>
+                            </View>
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    height: 40,
+                                    width: '15%',
+                                }}
+                            >
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>КОЭФ</Text>
+                            </View>
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    height: 40,
+                                    width: '15%',
+                                }}
+                            >
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>GRADE</Text>
+                            </View>
+                            <View
+                                style={{
+                                    marginTop: 10,
+                                    height: 40,
+                                    width: '15%',
+                                }}
+                            >
+                                <Text style={{ fontSize: 14, fontWeight: '700' }}>GPA</Text>
+                            </View>
                         </View>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                height: 40,
-                                width: '15%',
-                            }}
-                        >
-                            <Text style={{ fontSize: 14, fontWeight: '700' }}>ЗЕТ</Text>
-                        </View>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                height: 40,
-                                width: '15%',
-                            }}
-                        >
-                            <Text style={{ fontSize: 14, fontWeight: '700' }}>КОЭФ</Text>
-                        </View>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                height: 40,
-                                width: '15%',
-                            }}
-                        >
-                            <Text style={{ fontSize: 14, fontWeight: '700' }}>GRADE</Text>
-                        </View>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                height: 40,
-                                width: '15%',
-                            }}
-                        >
-                            <Text style={{ fontSize: 14, fontWeight: '700' }}>GPA</Text>
-                        </View>
-                    </View>
-                    {this.generateRows()}
+                        {this.generateRows()}
 
-                    <Text style={{ fontSize: 16, fontWeight: '700' }}>Work Load: {this.getTotalWeightSum()}</Text>
-                    <Text style={{ fontSize: 16, fontWeight: '700' }}>Sum of GPA: {this.getTotalGPASum()}</Text>
-                    <Text style={{ fontSize: 16, fontWeight: '700' }}>CGPA: {this.getCGPA()}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Work Load: {this.getTotalWeightSum()}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Sum of GPA: {this.getTotalGPASum()}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '700' }}>CGPA: {this.getCGPA()}</Text>
+                        <Button onPress={this.goBack} text='Clear' color={COLORS.red} textColor={COLORS.secondary} />
+                    </View>
                 </View>
-            </View>
             </ScrollView>
         );
     }
