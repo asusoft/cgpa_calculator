@@ -33,8 +33,9 @@ const Landing = () => {
                 }}
                 textAlign='center'
                 maxLength={2}
+                value={subjects}
             />
-            <Button onPress={() => handleNext()} text='Далее' color={COLORS.green} textColor={COLORS.secondary} />
+            <Button onPress={() => handleNext()} text='Далее' color={COLORS.grey} textColor={COLORS.secondary} />
             {
                 isModalVisible && (
                     <View style={styles.modalContainer}>

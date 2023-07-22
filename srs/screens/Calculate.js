@@ -26,7 +26,7 @@ class Calculate extends Component {
         const rows = [];
 
         for (let i = 0; i < parseInt(numberOfSubjects); i++) {
-          
+
 
             rows.push(
                 <View key={i} style={{ flexDirection: 'row', width: '100%', marginTop: -5 }}>
@@ -35,7 +35,7 @@ class Calculate extends Component {
                     </View>
                     <View style={{ flex: 1, marginStart: 15, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <FormInput
-                           
+
                             containerStyle={{
                                 height: 40,
                                 marginBottom: 30,
@@ -58,7 +58,7 @@ class Calculate extends Component {
                             maxLength={3}
                         />
                         <FormInput
-                           
+
                             containerStyle={{
                                 height: 40,
                                 marginBottom: 30,
@@ -178,7 +178,14 @@ class Calculate extends Component {
     };
 
     getCGPA = () => {
-        return (this.getTotalGPASum() / this.getTotalWeightSum()).toFixed(2)
+        const result = (this.getTotalGPASum() / this.getTotalWeightSum()).toFixed(2)
+
+        if(!isNaN(result)) {
+            return result
+        } else {
+            return ""
+        }
+
     };
 
     clearData = () => {
@@ -251,10 +258,10 @@ class Calculate extends Component {
                         </View>
                         {this.generateRows()}
 
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Work Load: {this.getTotalWeightSum()}</Text>
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Sum of GPA: {this.getTotalGPASum()}</Text>
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>CGPA: {this.getCGPA()}</Text>
-                        <Button onPress={this.goBack} text='Clear' color={COLORS.red} textColor={COLORS.secondary} />
+                        <Text style={{ fontSize: 16, fontWeight: '700', marginBottom: 10 }}>Work Load: {this.getTotalWeightSum()}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '700', marginBottom: 10 }}>Sum of GPA: {this.getTotalGPASum()}</Text>
+                        <Text style={{ fontSize: 22, fontWeight: '700', marginBottom: 20 }}>CGPA: {this.getCGPA()}</Text>
+                        <Button onPress={this.goBack} text='Сбросить' color={COLORS.red} textColor={COLORS.secondary} />
                     </View>
                 </View>
             </ScrollView>
