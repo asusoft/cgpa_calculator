@@ -11,7 +11,7 @@ const Landing = () => {
     const [subjects, setSubjects] = useState("")
 
     const handleNext = () => {
-        navigation.navigate("Calculate", { subjectsNum: subjects })
+        navigation.navigate("Calculate", { numberOfSubjects: subjects })
     }
     return (
         <View style={styles.container}>
