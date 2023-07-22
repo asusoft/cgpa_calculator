@@ -14,8 +14,8 @@
   <mp:PhoneIdentity PhoneProductId="7a64b19d-0063-444c-8248-9796c74e35fa" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>cgpa_calculator</DisplayName>
-    <PublisherDisplayName>Abubakar</PublisherDisplayName>
+    <DisplayName>CGPA CALCULATOR</DisplayName>
+    <PublisherDisplayName>Abubakar Shehu Umar</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
