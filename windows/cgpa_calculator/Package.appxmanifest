@@ -9,7 +9,7 @@
   <Identity
     Name="7a64b19d-0063-444c-8248-9796c74e35fa"
     Publisher="CN=Abubakar"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="7a64b19d-0063-444c-8248-9796c74e35fa" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
