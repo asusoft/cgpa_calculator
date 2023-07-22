@@ -4,10 +4,15 @@ import { View, Text, StyleSheet } from 'react-native';
 import Button from '../components/Button';
 import FormInput from '../components/FormInput';
 import { COLORS } from '../assets/constants/theme';
+import { useNavigation } from '@react-navigation/native';
 // create a component
 const Landing = () => {
+    const navigation = useNavigation()
     const [subjects, setSubjects] = useState("")
 
+    const handleNext = () => {
+        navigation.navigate("Calculate", { subjectsNum: subjects })
+    }
     return (
         <View style={styles.container}>
             <Text>Введите количество дисциплин</Text>
@@ -23,7 +28,7 @@ const Landing = () => {
                 textAlign='center'
                 maxLength={2}
             />
-           <Button text='Далее' color={COLORS.green} textColor={COLORS.secondary}/>
+           <Button onPress={() => handleNext()} text='Далее' color={COLORS.green} textColor={COLORS.secondary}/>
         </View>
     );
 };

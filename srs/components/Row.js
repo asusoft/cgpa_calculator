@@ -3,9 +3,25 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FormInput from './FormInput';
 import { COLORS } from '../assets/constants/theme';
+import { getCoefficient, getGrade } from '../context/functions';
 
 // create a component
 const Row = () => {
+    const [ball, setBall] = useState('')
+    const [weight, setWeight] = useState('')
+    const [coefficient, setCoefficient] = useState('')
+    const [grade, setGrade] = useState('')
+    const [gpa, setGPA] = useState('')
+
+    React.useEffect(() => {
+        if(coefficient != '' && weight != ''){
+            const result = weight * coefficient
+            setGPA(result)
+        } else {
+            setGPA('')
+        }
+    }, [weight, coefficient ])
+
     return (
         <View style={{ flexDirection: 'row', width: '100%', marginTop: -5 }}>
             <View>
@@ -24,8 +40,15 @@ const Row = () => {
                     inputContainerStyle={{
                         height: 40,
                     }}
+                    onChange={value => {
+                        setBall(value);
+                        const result = getCoefficient(value)
+                        setCoefficient(result)
+                        const grd = getGrade(value)
+                        setGrade(grd)
+                    }}
                     textAlign='center'
-                    maxLength={2}
+                    maxLength={3}
                 />
                 <FormInput
                     containerStyle={{
@@ -39,6 +62,9 @@ const Row = () => {
                     inputContainerStyle={{
                         height: 40,
                     }}
+                    onChange={value => {
+                        setWeight(value);
+                    }}
                     textAlign='center'
                     maxLength={2}
                 />
@@ -51,7 +77,7 @@ const Row = () => {
                         width: '15%',
                     }}
                 >
-                    <Text style={{ fontSize: 14, fontWeight: '700' }}>КОЭФ</Text>
+                    <Text style={{ fontSize: 14, fontWeight: '700' }}>{coefficient}</Text>
                 </View>
                 <View
                     style={{
@@ -62,7 +88,7 @@ const Row = () => {
                         width: '15%',
                     }}
                 >
-                    <Text style={{ fontSize: 14, fontWeight: '700' }}>GRADE</Text>
+                    <Text style={{ fontSize: 14, fontWeight: '700' }}>{grade}</Text>
                 </View>
                 <View
                     style={{
@@ -73,7 +99,7 @@ const Row = () => {
                         width: '15%',
                     }}
                 >
-                    <Text style={{ fontSize: 14, fontWeight: '700' }}>GPA</Text>
+                    <Text style={{ fontSize: 14, fontWeight: '700' }}>{gpa}</Text>
                 </View>
             </View>
         </View>

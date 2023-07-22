@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Loading from '../screens/Loading';
 import Landing from '../screens/Landing';
+import CalculateScreen from "../screens/CalculateScreen";
 
 const RootStack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const RootNavigator = () => {
         return (
             <RootStack.Navigator screenOptions={{ headerShown: false }}>
                 <RootStack.Screen name="Landing" component={Landing} />
+                <RootStack.Screen name="Calculate" component={CalculateScreen} />
             </RootStack.Navigator>
         )
     }
