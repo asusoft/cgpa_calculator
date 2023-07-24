@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FormInput from '../components/FormInput';
 import { getCoefficient, getGrade } from '../context/functions';
 import { COLORS } from '../assets/constants/theme';
@@ -116,25 +116,30 @@ class Calculate extends Component {
     };
 
     handleScoreChange = (text, index) => {
-        this.setState(prevState => {
+        const score = parseFloat(text);
+        this.setState((prevState) => {
             const subjectsCopy = [...prevState.subjects];
             subjectsCopy[index] = {
                 ...subjectsCopy[index],
-                score: parseFloat(text),
+                score: score,
             };
             return { subjects: subjectsCopy };
+        }, () => {
+            this.handleGPAChange(index);
         });
     };
 
     handleWeightChange = (text, index) => {
-        this.setState(prevState => {
+        const weight = parseFloat(text);
+        this.setState((prevState) => {
             const subjectsCopy = [...prevState.subjects];
             subjectsCopy[index] = {
                 ...subjectsCopy[index],
-                weight: parseFloat(text),
-                gpa: this.getGPA(index)
+                weight: weight,
             };
             return { subjects: subjectsCopy };
+        }, () => {
+            this.handleGPAChange(index);
         });
     };
 
@@ -154,14 +159,29 @@ class Calculate extends Component {
         });
     };
 
-    getGPA = (index) => {
-        const subject = this.state.subjects[index];
+    handleGPAChange = (index) => {
+        this.setState((prevState) => {
+            const subjectsCopy = [...prevState.subjects];
+            const coefficient = subjectsCopy[index]?.coefficient;
+            const weight = subjectsCopy[index]?.weight;
 
-        if (subject && !isNaN(subject.coefficient) && !isNaN(subject.weight)) {
-            return subject.coefficient * subject.weight;
-        } else {
-            return '';
-        }
+            if (!isNaN(coefficient) && !isNaN(weight) && coefficient !== 0) {
+                subjectsCopy[index] = {
+                    ...subjectsCopy[index],
+                    gpa: coefficient * weight,
+                };
+            } else {
+                subjectsCopy[index] = {
+                    ...subjectsCopy[index],
+                    gpa: '',
+                };
+            }
+            return { subjects: subjectsCopy };
+        });
+    };
+
+    getGPA = (index) => {
+        return !isNaN(this.state.subjects[index]?.coefficient) && isNaN(this.state.subjects[index]?.weight) ? (this.state.subjects[index]?.coefficient * this.state.subjects[index]?.weight) : ''
     }
 
     getTotalWeightSum = () => {
