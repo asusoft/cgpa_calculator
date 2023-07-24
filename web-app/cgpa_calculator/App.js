@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Loading from './srs/screens/Loading';
+import Landing from './srs/screens/Landing';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Loading />
-    </View>
+
+    <Landing />
+
 
   );
 }
