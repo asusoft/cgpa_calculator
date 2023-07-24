@@ -36,13 +36,17 @@ const Landing = () => {
                 value={subjects}
             />
             <Button onPress={() => handleNext()} text='Далее' color={COLORS.grey} textColor={COLORS.secondary} />
-            {
-                isModalVisible && (
-                    <View style={styles.modalContainer}>
-                        <Calculate numberOfSubjects={subjects} closeModal={closeModal} />
-                    </View>
-                )
-            }
+
+            <Modal
+                animationType="slide"
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    setIsModalVisible(!isModalVisible);
+                }}
+            >
+                <Calculate numberOfSubjects={subjects} closeModal={closeModal} />
+            </Modal>
+
         </View>
     );
 };

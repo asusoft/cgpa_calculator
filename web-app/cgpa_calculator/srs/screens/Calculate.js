@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Modal } from 'react-native';
 import FormInput from '../components/FormInput';
 import { getCoefficient, getGrade } from '../context/functions';
 import { COLORS } from '../assets/constants/theme';
@@ -26,8 +26,6 @@ class Calculate extends Component {
         const rows = [];
 
         for (let i = 0; i < parseInt(numberOfSubjects); i++) {
-
-
             rows.push(
                 <View key={i} style={{ flexDirection: 'row', width: '100%', marginTop: -5 }}>
                     <View>
@@ -58,7 +56,6 @@ class Calculate extends Component {
                             maxLength={3}
                         />
                         <FormInput
-
                             containerStyle={{
                                 height: 40,
                                 marginBottom: 30,
@@ -121,7 +118,10 @@ class Calculate extends Component {
     handleScoreChange = (text, index) => {
         this.setState(prevState => {
             const subjectsCopy = [...prevState.subjects];
-            subjectsCopy[index] = { ...subjectsCopy[index], score: parseFloat(text) };
+            subjectsCopy[index] = {
+                ...subjectsCopy[index],
+                score: parseFloat(text),
+            };
             return { subjects: subjectsCopy };
         });
     };
@@ -132,7 +132,7 @@ class Calculate extends Component {
             subjectsCopy[index] = {
                 ...subjectsCopy[index],
                 weight: parseFloat(text),
-                gpa: !isNaN(this.state.subjects[index]?.coefficient) ? (this.state.subjects[index]?.coefficient * parseFloat(text)) : ''
+                gpa: this.getGPA(index)
             };
             return { subjects: subjectsCopy };
         });
@@ -154,14 +154,15 @@ class Calculate extends Component {
         });
     };
 
-    handleGPAChange = (text, index) => {
-        this.setState(prevState => {
-            const subjectsCopy = [...prevState.subjects];
-            subjectsCopy[index] = { ...subjectsCopy[index], gpa: text };
-            return { subjects: subjectsCopy };
-        });
-    };
+    getGPA = (index) => {
+        const subject = this.state.subjects[index];
 
+        if (subject && !isNaN(subject.coefficient) && !isNaN(subject.weight)) {
+            return subject.coefficient * subject.weight;
+        } else {
+            return '';
+        }
+    }
 
     getTotalWeightSum = () => {
         return this.state.subjects.reduce(
@@ -180,7 +181,7 @@ class Calculate extends Component {
     getCGPA = () => {
         const result = (this.getTotalGPASum() / this.getTotalWeightSum()).toFixed(2)
 
-        if(!isNaN(result)) {
+        if (!isNaN(result)) {
             return result
         } else {
             return ""
