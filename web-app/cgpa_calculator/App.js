@@ -1,15 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import Loading from './srs/screens/Loading';
 import Landing from './srs/screens/Landing';
+import { View } from 'react-native';
 
 export default function App() {
-  return (
 
-    <Landing />
+  const [loading, setLoading] = useState(true)
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    // Cleanup the timer when the component unmounts or the dependency changes
+    return () => clearTimeout(timer);
+  })
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Loading />
+      </View>
+    )
+  } else {
+    return (
+
+      <Landing />
 
 
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
