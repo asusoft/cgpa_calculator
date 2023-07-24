@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.cb887cb9.js",
-    "static/js/325.0da284ae.js": "/static/js/325.0da284ae.js",
-    "static/media/savvy.png": "/static/media/savvy.22257cdd543a7f3ddb57.png",
-    "favicon.ico": "/favicon.ico",
-    "index.html": "/index.html",
-    "favicon-32.png": "/favicon-32.png",
-    "favicon-16.png": "/favicon-16.png",
-    "manifest.json": "/manifest.json",
-    "serve.json": "/serve.json",
-    "main.cb887cb9.js.map": "/static/js/main.cb887cb9.js.map",
-    "325.0da284ae.js.map": "/static/js/325.0da284ae.js.map"
+    "main.js": "/cgpa_calculator/static/js/main.d6494ca8.js",
+    "static/js/325.0da284ae.js": "/cgpa_calculator/static/js/325.0da284ae.js",
+    "static/media/savvy.png": "/cgpa_calculator/static/media/savvy.22257cdd543a7f3ddb57.png",
+    "favicon.ico": "/cgpa_calculator/favicon.ico",
+    "index.html": "/cgpa_calculator/index.html",
+    "favicon-32.png": "/cgpa_calculator/favicon-32.png",
+    "favicon-16.png": "/cgpa_calculator/favicon-16.png",
+    "manifest.json": "/cgpa_calculator/manifest.json",
+    "serve.json": "/cgpa_calculator/serve.json",
+    "main.d6494ca8.js.map": "/cgpa_calculator/static/js/main.d6494ca8.js.map",
+    "325.0da284ae.js.map": "/cgpa_calculator/static/js/325.0da284ae.js.map"
   },
   "entrypoints": [
     "static/js/325.0da284ae.js",
-    "static/js/main.cb887cb9.js"
+    "static/js/main.d6494ca8.js"
   ]
 }
