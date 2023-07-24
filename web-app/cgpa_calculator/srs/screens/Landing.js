@@ -21,18 +21,18 @@ const Landing = () => {
     }
     return (
         <View style={styles.container}>
-            <Text>Введите количество дисциплин</Text>
+            <Text style={{ fontSize: 18 }}>Введите количество дисциплин</Text>
             <FormInput
                 containerStyle={{
-                    height: 50,
-                    width: '50%',
+                    height: 52,
+                    width: '10%',
                     marginBottom: 30
                 }}
                 onChange={value => {
                     setSubjects(value);
                 }}
                 textAlign='center'
-                maxLength={2}
+                maxLength={3}
                 value={subjects}
             />
             <Button onPress={() => handleNext()} text='Далее' color={COLORS.grey} textColor={COLORS.secondary} />

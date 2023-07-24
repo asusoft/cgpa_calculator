@@ -10,7 +10,7 @@ export default function App() {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
 
     // Cleanup the timer when the component unmounts or the dependency changes
     return () => clearTimeout(timer);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FormInput from '../components/FormInput';
 import { getCoefficient, getGrade } from '../context/functions';
@@ -18,9 +18,6 @@ class Calculate extends Component {
         this.setState({ numberOfSubjects: text });
     };
 
-
-    textInputRefs = []
-
     generateRows = () => {
         const { numberOfSubjects } = this.props;
         const rows = [];
@@ -33,15 +30,12 @@ class Calculate extends Component {
                     </View>
                     <View style={{ flex: 1, marginStart: 15, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <FormInput
-
                             containerStyle={{
-                                height: 40,
+                                height: 52,
                                 marginBottom: 30,
                                 width: '15%',
                             }}
-                            inputStyle={{
-                                height: 40,
-                            }}
+                            focus={false}
                             inputContainerStyle={{
                                 height: 40,
                             }}
@@ -57,12 +51,9 @@ class Calculate extends Component {
                         />
                         <FormInput
                             containerStyle={{
-                                height: 40,
+                                height: 52,
                                 marginBottom: 30,
                                 width: '15%',
-                            }}
-                            inputStyle={{
-                                height: 40,
                             }}
                             inputContainerStyle={{
                                 height: 40,
@@ -72,7 +63,7 @@ class Calculate extends Component {
                             }}
                             keyboardType='numeric'
                             textAlign='center'
-                            maxLength={2}
+                            maxLength={3}
                         />
                         <View
                             style={{
@@ -114,6 +105,7 @@ class Calculate extends Component {
 
         return rows;
     };
+
 
     handleScoreChange = (text, index) => {
         const score = parseFloat(text);

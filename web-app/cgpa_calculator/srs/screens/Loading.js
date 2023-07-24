@@ -8,9 +8,10 @@ import images from '../assets/constants/images';
 const Loading = () => {
     return (
         <View style={styles.container}>
-            <Text>European standard CGPA calculator</Text>
+            <Text style={{ fontSize: 18 }}>Калькулятор для расчета GPA РФ. </Text>
+            <Text style={{ fontSize: 18, marginTop: 10 }}>100 баллов / 5-й формальная РФ.</Text>
             <View style={{ position: 'absolute', bottom: 70, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 18 }}>developed by</Text>
+                <Text style={{ fontSize: 18, marginBottom: 5 }}>Разработано: </Text>
                 <Image source={images.savvy} style={{ width: 150, height: 50, resizeMode: 'contain', resizeMode: 'contain', marginEnd: 12 }} />
             </View>
         </View>

@@ -10,60 +10,45 @@ import { COLORS } from '../assets/constants/theme';
 
 // create a component
 const FormInput = ({
+    focus,
     containerStyle,
-    label,
     placeholder,
-    inputStyle,
-    prependComponent,
-    appendComponent,
     onChange,
     secureTextEntry,
     keyboardType = 'default',
     autoComplete = 'off',
     autoCapitalize = 'none',
-    errorMsg = '',
     maxLength,
     editable,
     value,
     textAlign,
+    onSubmitEditing,
     inputContainerStyle,
     ref
 }) => {
     return (
         <View style={{ ...containerStyle }}>
-            {/* Label & Error msg */}
-            {
-                label || errorMsg ? (
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={{ color: COLORS.gray, marginEnd: 10 }}>{label}</Text>
-                        <Text style={{ color: COLORS.red, marginEnd: 10 }}>{errorMsg}</Text>
-                    </View>) : null
-            }
-
-            {/* Text input */}
-            <View style={[styles.containerInput, { ...inputContainerStyle }]}>
-                {prependComponent}
-                <TextInput
-                    style={{
-                        ...styles.input,
-                        ...inputStyle,
-                    }}
-                    editable={editable}
-                    placeholder={placeholder}
-                    placeholderTextColor={COLORS.gray}
-                    secureTextEntry={secureTextEntry}
-                    keyboardType={keyboardType}
-                    autoComplete={autoComplete}
-                    autoCapitalize={autoCapitalize}
-                    onChangeText={(text) => onChange(text)}
-                    maxLength={maxLength}
-                    value={value}
-                    autoCorrect={false}
-                    textAlign={textAlign}
-                    ref={ref}
-                />
-                {appendComponent}
-            </View>
+            <TextInput
+                style={{
+                    ...styles.containerInput,
+                    ...inputContainerStyle,
+                }}
+                autoFocus={focus}
+                editable={editable}
+                placeholder={placeholder}
+                placeholderTextColor={COLORS.gray}
+                secureTextEntry={secureTextEntry}
+                keyboardType={keyboardType}
+                autoComplete={autoComplete}
+                autoCapitalize={autoCapitalize}
+                onChangeText={(text) => onChange(text)}
+                maxLength={maxLength}
+                value={value}
+                autoCorrect={false}
+                textAlign={textAlign}
+                onSubmitEditing={onSubmitEditing}
+                ref={ref}
+            />
         </View>
     );
 };
@@ -71,18 +56,21 @@ const FormInput = ({
 // define your styles
 const styles = StyleSheet.create({
     containerInput: {
-        flexDirection: 'row',
         height: 52,
         marginTop: 10,
         borderRadius: 10,
+        padding: 10, // Add padding inside the text input
+        fontSize: 18,
         borderWidth: 1,
-        backgroundColor:COLORS.background,
+        backgroundColor: COLORS.background,
         borderColor: COLORS.grey,
     },
     input: {
+        justifyContent: 'center',
+        alignItems: 'center',
         flex: 1,
         height: 52,
-      },
+    },
 });
 
 //make this component available to the app
