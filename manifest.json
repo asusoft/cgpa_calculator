@@ -1,0 +1,9 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "lang": "en",
+  "name": "cgpa_calculator",
+  "short_name": "cgpa_calculator",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait"
+}
